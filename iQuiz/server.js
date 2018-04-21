@@ -75,11 +75,11 @@ io.on('connection', function (socket) {
 
 connectionOptions = {
 	ip: 'tcp://0.tcp.ngrok.io/',
-	port: 10720
+	port: 16162
 };
 
 
-var socket = net.createConnection(10720, '0.tcp.ngrok.io', function(req,res) {
+var socket = net.createConnection(16162, '0.tcp.ngrok.io', function(req,res) {
 	setInterval(function() {
 		socket.write(JSON.stringify({
 		    "category": "heartbeat"
