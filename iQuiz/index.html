@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Quiz</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+  <!-- Custom styles for this template -->
+  <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <div class="jumbotron">
+  <h1 class="display-4">Vizap</h1>
+  <p class="lead"> Taking the power of your vision to the next level.</p>
+  <hr class="my-4">
+  <p class="lead">To Start the Quiz just stare at the Start Quiz for 5 seconds and the quiz will start for you!!!</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-block setheight"  href="question" role="button"><b>Start Quiz</b></a>
+  </p>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <hr>
+  <footer>
+    <p>&copy; Vizap 2018</p>
+  </footer>
+</div> <!-- /container -->
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+      var socket = io.connect('http://localhost:3000');
+      $(document).ready(function () {
+        socket.emit('start_quiz');
+      });
+      socket.on('quiz_started', function (data) {
+          console.log('quiz started');
+          window.location.href = "http://localhost:3000/question";
+      });
+      
+    </script>
+  </body>
+  </html>

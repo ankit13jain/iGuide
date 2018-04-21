@@ -1,0 +1,123 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Quiz</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+  <!-- Custom styles for this template -->
+  <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <div class="container">
+    <br>
+    <% for(var i=0; i < questions.length; i++) { %>
+    <h1 class="display-4"><%= questions[i].question_text %> </h1>
+    <br><br>
+    <div class="row">
+      <span class="border border-primary rounded text-center" id="opt1">
+      <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
+        <br><br>
+        <h1><b><%= questions[i].options.option_1 %></b></h1>
+      </div>
+      </span>
+      <span class="border border-primary rounded text-center questionmargin" id="opt2">
+      <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
+       <br><br>
+       <h1><b><%= questions[i].options.option_2 %></b></h1>
+       </div>
+     </span>
+  </div>
+  <br><br><br><br><br>
+  <div class="row">
+    <span class="border border-primary rounded text-center" id="opt3">
+    <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
+      <br><br>
+      <h1><b><%= questions[i].options.option_3 %></b></h1>
+    </div>
+    </span>
+    <span class="border border-primary rounded text-center questionmargin" id="opt4">
+    <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
+     <br><br>
+     <h1><b><%= questions[i].options.option_4 %></b></h1>
+     </div>
+   </span>
+</div>
+<% } %>
+</div>
+<div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel">Confirm Selection</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h1>You selected option :&nbsp;<span id="selectedValue"></span></h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary mr-auto btn-modal" id="confirm-btn">Confirm</button>
+        <button type="button" class="btn btn-secondary btn-modal" id="cancel-btn" data-dismiss="modal">
+        Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <hr>
+</div> <!-- /container -->
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost:3000');
+      var selected_option = 1;
+      $(document).ready(function () {
+        socket.emit('Question_Reading_Starts');
+      });
+      socket.on('selected_option', function (data) {
+        console.log(data);
+        selected_option = data;
+        document.getElementById('selectedValue').innerHTML=selected_option;
+        $('#ConfirmModal').modal('show');
+          socket.emit('Confirmation_Starts');
+        });
+      socket.on('confirmation_ends', function (data) {
+        if(data==3 || data==5){
+          $("#confirm-btn").trigger("click"); 
+        }
+        else if(data==4 || data==6){
+          $("#cancel-btn").trigger("click"); 
+        }
+      });
+
+      socket.on('region',function(){
+        var elements = document.getElementsByClassName('default-option-color');
+        for(var i=0;i<elements.length;i++){
+          
+        }
+      });
+      $('#cancel-btn').click(function(){
+          console.log('cancel clicked');
+          socket.emit('Question_Reading_Starts');
+      });
+      $('#confirm-btn').click(function(){
+          console.log('confirm clicked');
+          window.location.href = "http://localhost:3000/question/result1?selected_option=" + selected_option;
+      });
+    </script>
+  </body>
+  </html>
