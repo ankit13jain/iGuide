@@ -62,24 +62,24 @@ io.on('connection', function (socket) {
   	collected_data = [];
   	index=0;
   	isConfirmation = true;
-  });	
+  });
   socket.on('start_quiz',function(){
   	console.log('start_quiz');
   	collected_data = [];
   	index=0;
   	isStartQuiz = true;
-  });	
+  });
 });
 
 // Connecting to eye tribe
 
 connectionOptions = {
 	ip: 'tcp://0.tcp.ngrok.io/',
-	port: 10720
+	port: 10435
 };
 
 
-var socket = net.createConnection(10720, '0.tcp.ngrok.io', function(req,res) {
+var socket = net.createConnection(10435, '0.tcp.ngrok.io', function(req,res) {
 	setInterval(function() {
 		socket.write(JSON.stringify({
 		    "category": "heartbeat"
@@ -148,7 +148,7 @@ function handleFrameData(data) {
 				isStartQuiz = false;
 				collected_data = [];
 	  			index=0;
-	  			io.sockets.emit('quiz_started', collected_data[0]);	
+	  			io.sockets.emit('quiz_started', collected_data[0]);
 			}
 			else if(isAnswering == true){
 				var selected_option = collected_data[0]-2;
@@ -163,7 +163,7 @@ function handleFrameData(data) {
 
 
 function get_region(x,y){
-	var max_x = 1300; 
+	var max_x = 1300;
 	var max_y = 700;
 	// var max_x = 1920;
 	// var max_y = 1080;
