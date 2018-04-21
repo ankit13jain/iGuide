@@ -61,11 +61,11 @@ var collected_data = [];
 
 // When a client connects, we note it in the console
 io.sockets.on('connection', function (socket) {
-    // When the server receives a “message” type signal from the client
+    // When the server receives a “message” type signal from the client   
     socket.on('message', function (message) {
         console.log('A client is speaking to me! They’re saying: ' + message);
         socket.emit('redirect', '/index_try.html');
-    });
+    }); 
 
 	// analysis and emit function
 	start_collecting().then(function(data) {
@@ -88,16 +88,16 @@ function format_data(data,callback){
 	data_to_send = []
 	for (var j in counts){
 		console.log("Haha");
-		console.log(coordinates.small[j]["x"]);
-		console.log(coordinates.small[j]["y"]);
+		console.log(coordinates.six_six[j]["x"]);
+		console.log(coordinates.six_six[j]["y"]);
 		curr = {
 			"id" : parseInt(j),
 			"count" : counts[j],
-			"x" : Math.floor(coordinates.small[j]["x"]),
-			"y" : Math.floor(coordinates.small[j]["y"])
+			"x" : Math.floor(coordinates.six_six[j]["x"]),
+			"y" : Math.floor(coordinates.six_six[j]["y"])
 		}
 		data_to_send.push(curr);
-	}
+	}	
 	callback(data_to_send);
 }
 
@@ -108,7 +108,7 @@ function start_collecting() {
 		setTimeout(function() {
 			collect_flag = false;
 			resolve(collected_data);
-		},5000);
+		},3000);
 	});
    return promise;
 }
@@ -169,30 +169,26 @@ socket.setEncoding('utf8');
 function handleFrameData(data) {
 	// console.log(data.avg.x+'\t\t'+data.avg.y);
 	var region = get_region(data.avg.x,data.avg.y)
-	if (region !=0) {
-		console.log(region);
-		if(collect_flag){
-			collected_data.push(region);
-		}
-		io.sockets.emit('frame', data);
+	console.log(region);
+	if(collect_flag){
+		collected_data.push(region);
 	}
+	io.sockets.emit('frame', data);
 }
 
 
 function get_region(x,y){
-	var max_x = 1300;
+	var max_x = 1300; 
 	var max_y = 700;
 	// var max_x = 1920;
 	// var max_y = 1080;
-	var incr_x = max_x/4;
-	var incr_y = max_y/3;
-	if (x==0 && y==0) {
-		return 0;
-	}
+	var incr_x = max_x/6;
+	var incr_y = max_y/6;
 	if(x < 0) x = 0;
 	if(y < 0) y = 0;
 	if(x > max_x) x = max_x;
 	if(y > max_y) y = max_y;
 	console.log(x+"\t\t"+y);
-	return (Math.floor(y/(incr_y+1))*4)+Math.floor(x/(incr_x+1))+1;
+	// Here 6 is the number of xolumns
+	return (Math.floor(y/(incr_y+1))*6)+Math.floor(x/(incr_x+1))+1;
 }
