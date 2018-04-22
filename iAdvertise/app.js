@@ -117,11 +117,11 @@ function start_collecting() {
 
 connectionOptions = {
 	ip: 'tcp://0.tcp.ngrok.io/',
-	port: 12571
+	port: 12658
 };
 
 
-var socket = net.createConnection(12571, '0.tcp.ngrok.io', function(req,res) {
+var socket = net.createConnection(12658, '0.tcp.ngrok.io', function(req,res) {
 	setInterval(function() {
 		socket.write(JSON.stringify({
 		    "category": "heartbeat"
@@ -149,12 +149,6 @@ var socket = net.createConnection(12571, '0.tcp.ngrok.io', function(req,res) {
 			}
 	})
 
-	// Get some values
-//	socket.write(JSON.stringify({
-//		category: 'tracker',
-//		request: 'get',
-//		values: ['framerate','heartbeatinterval', 'frame']
-//	}));
 
 	// Set some values
 	socket.write(JSON.stringify({

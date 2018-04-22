@@ -5,8 +5,6 @@ exports.selectedOption1 = function(req,res){
 	if(selected_ans == correct_ans)
 		req.session.correct = req.session.correct +1;
 	req.session.answers.push([correct_ans,selected_ans,correct_ans==selected_ans]);
-	console.log("req.session.answers"+req.session.answers[0]);
-	console.log("req.session.correct",req.session.correct);
 	res.send("selection saved successfully");
 }
 
@@ -30,7 +28,6 @@ exports.selectedOption3 = function(req,res){
 	data={};
 	data["answers"]=req.session.answers;
 	data["accuracy"]=(req.session.correct*100/req.session.answers.length).toFixed(2);
-	console.log("data",data);
 	res.setHeader('Content-Type', 'application/json');
 	res.send(data);
 }

@@ -20,7 +20,7 @@ const QuestionRouter = require('./routes/QuestionRouter');
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-// Session related for tracking logins
+// Session related for tracking logins to store the score
 app.use(session({
   secret: 'PackHacks',
   resave: true,
@@ -78,11 +78,11 @@ io.on('connection', function (socket) {
 
 connectionOptions = {
 	ip: 'tcp://0.tcp.ngrok.io/',
-	port: 12571
+	port: 12658
 };
 
 
-var socket = net.createConnection(12571, '0.tcp.ngrok.io', function(req,res) {
+var socket = net.createConnection(12658, '0.tcp.ngrok.io', function(req,res) {
 	setInterval(function() {
 		socket.write(JSON.stringify({
 		    "category": "heartbeat"
@@ -105,7 +105,7 @@ var socket = net.createConnection(12571, '0.tcp.ngrok.io', function(req,res) {
 					handleFrameData(data.values.frame);
 				}
 			} catch(e) {
-				//console.error('Malformed JSON', e);
+				console.error('Malformed JSON', e);
 			}
 	})
 
@@ -123,7 +123,7 @@ function handleFrameData(data) {
 	var region = get_region(data.avg.x,data.avg.y)
 	if(region!=0)
 		collected_data.splice(index%time_out, 1, region);
-	//console.log(collected_data.length);
+	console.log(collected_data.length);
 	index=index+1;
 	const collected_set = new Set(collected_data);
 	console.log('region',region);
