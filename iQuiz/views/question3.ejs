@@ -17,7 +17,7 @@
 <body>
   <div class="container">
     <br>
-    <h1 class="display-4"><%= questions[2].question_text %> </h1>
+    <h1 class="display-4"><b><%= questions[2].question_text %></b> </h1>
     <br><br>
     <div class="row">
       <span class="border border-primary rounded text-center default-option-color" id="opt1">
@@ -71,6 +71,9 @@
 <div class="container">
   <!-- Example row of columns -->
   <hr>
+  <footer>
+    <p>&copy; iGuide 2018</p>
+  </footer>
 </div> <!-- /container -->
    <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -100,10 +103,10 @@
         });
       socket.on('confirmation_ends', function (data) {
         if(data==3 || data==5){
-          $("#confirm-btn").trigger("click"); 
+          $("#confirm-btn").trigger("click");
         }
         else if(data==4 || data==6){
-          $("#cancel-btn").trigger("click"); 
+          $("#cancel-btn").trigger("click");
         }
       });
 
