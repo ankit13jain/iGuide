@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
   <!-- Custom styles for this template -->
   <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 
 <body>
@@ -107,10 +108,19 @@
         }
       });
 
-      socket.on('region',function(){
-        var elements = document.getElementsByClassName('default-option-color');
-        for(var i=0;i<elements.length;i++){
-          
+      var pre_opt = 1;
+      socket.on('regions',function(option){
+        console.log(option);
+        if(pre_opt != option){
+          pre_opt = option;
+          $(".default-option-color").removeClass("selected-option");
+          // var elements = document.getElementsByClassName('default-option-color');
+          // for(var i=0;i<elements.length;i++){
+          //   console.log(elements[i].id)
+          //   elements[i].removeClass('selected-option');
+          // }
+          var opt = "#opt"+option;
+          $(opt).addClass('selected-option');
         }
       });
       $('#cancel-btn').click(function(){

@@ -3,7 +3,7 @@ from coordinates import Coordinate
 
 # Getting all coordinates
 c = Coordinate(0,0,1300,700)
-c.set_grid(2,3)
+c.set_grid(6,6)
 points = c.get_coordinates()
 print(points)
 

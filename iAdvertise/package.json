@@ -1,0 +1,21 @@
+{
+  "name": "advertise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Azra Shaikh",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "http": "0.0.0",
+    "mongoose": "^5.0.1",
+    "nodemon": "^1.17.3",
+    "socket.io": "^2.1.0"
+  }
+}
