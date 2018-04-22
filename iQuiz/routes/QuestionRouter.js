@@ -31,6 +31,18 @@ QuestionRouter.route('/question2').get(function (req, res) {
     });
 });
 
+QuestionRouter.route('/question3').get(function (req, res) {
+   Question.find(function (err, questions){
+      if(err){
+        console.log(err);
+      }
+      else {
+        res.render('question3', {questions: questions});
+      }
+    });
+});
+
+
 QuestionRouter.route('/result1').get(function (req, res) {
     	console.log('result1 parameters: ',req.query);
         res.render('result1',{selected_option: req.query.selected_option});

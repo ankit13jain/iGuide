@@ -17,19 +17,19 @@
 <body>
   <div class="container">
     <br>
-    <h1 class="display-4"><%= questions[0].question_text %> </h1>
+    <h1 class="display-4"><%= questions[2].question_text %> </h1>
     <br><br>
     <div class="row">
       <span class="border border-primary rounded text-center" id="opt1">
       <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
         <br><br>
-        <h1><b><%= questions[0].options.option_1 %></b></h1>
+        <h1><b><%= questions[2].options.option_1 %></b></h1>
       </div>
       </span>
       <span class="border border-primary rounded text-center questionmargin" id="opt2">
       <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
        <br><br>
-       <h1><b><%= questions[0].options.option_2 %></b></h1>
+       <h1><b><%= questions[2].options.option_2 %></b></h1>
        </div>
      </span>
   </div>
@@ -38,13 +38,13 @@
     <span class="border border-primary rounded text-center" id="opt3">
     <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
       <br><br>
-      <h1><b><%= questions[0].options.option_3 %></b></h1>
+      <h1><b><%= questions[2].options.option_3 %></b></h1>
     </div>
     </span>
     <span class="border border-primary rounded text-center questionmargin" id="opt4">
     <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
      <br><br>
-     <h1><b><%= questions[0].options.option_4 %></b></h1>
+     <h1><b><%= questions[2].options.option_4 %></b></h1>
      </div>
    </span>
 </div>
@@ -137,8 +137,8 @@
             url:"/recordSelectedOption3",
             async:true,
             success:function(data){
-              console.log("selection recorded Successfully");
-              window.location.href = "http://localhost:3000/question/result1";
+              console.log("selection recorded Successfully",data);
+              //window.location.href = "http://localhost:3000/question/result1";
             },
             error:function(request, status, error){
               console.log("Could not record selection : "+request.responseText);
