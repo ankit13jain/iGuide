@@ -134,11 +134,11 @@
             data:{
               question_selected:selected_option
             },
-            url:"/recordSelectedOption1",
+            url:"/recordSelectedOption2",
             async:true,
             success:function(){
               console.log("selection recorded Successfully");
-              window.location.href = "http://localhost:3000/question/question2";
+              window.location.href = "http://localhost:3000/question/question3";
             },
             error:function(request, status, error){
               console.log("Could not record selection : "+request.responseText);

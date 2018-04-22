@@ -8,6 +8,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 var net = require('net');
+var QuizController = require('./controllers/QuizController');
 
 server.listen(3000);
 console.log('Server Listening on port 3000');
@@ -34,7 +35,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/question', QuestionRouter);
-
+app.post('/recordSelectedOption1', QuizController.selectedOption1);
+app.post('/recordSelectedOption2', QuizController.selectedOption2);
+app.post('/recordSelectedOption3', QuizController.selectedOption3);
 app.get('/', function (req, res) {
    res.sendFile(__dirname + '/index.html');
 });
@@ -75,11 +78,11 @@ io.on('connection', function (socket) {
 
 connectionOptions = {
 	ip: 'tcp://0.tcp.ngrok.io/',
-	port: 10720
+	port: 16162
 };
 
 
-var socket = net.createConnection(10720, '0.tcp.ngrok.io', function(req,res) {
+var socket = net.createConnection(16162, '0.tcp.ngrok.io', function(req,res) {
 	setInterval(function() {
 		socket.write(JSON.stringify({
 		    "category": "heartbeat"
@@ -102,18 +105,10 @@ var socket = net.createConnection(10720, '0.tcp.ngrok.io', function(req,res) {
 					handleFrameData(data.values.frame);
 				}
 			} catch(e) {
-				console.error('Malformed JSON', e);
+				//console.error('Malformed JSON', e);
 			}
 	})
 
-	// Get some values
-//	socket.write(JSON.stringify({
-//		category: 'tracker',
-//		request: 'get',
-//		values: ['framerate','heartbeatinterval', 'frame']
-//	}));
-
-	// Set some values
 	socket.write(JSON.stringify({
 		category: 'tracker',
 		request: 'set',
@@ -124,17 +119,15 @@ var socket = net.createConnection(10720, '0.tcp.ngrok.io', function(req,res) {
 socket.setEncoding('utf8');
 
 function handleFrameData(data) {
-	//console.log(data.avg.x+'\t\t'+data.avg.y);
 
 	var region = get_region(data.avg.x,data.avg.y)
 	if(region!=0)
 		collected_data.splice(index%time_out, 1, region);
-	console.log(collected_data.length);
+	//console.log(collected_data.length);
 	index=index+1;
 	const collected_set = new Set(collected_data);
-	console.log('region',region);
-	console.log('set size',collected_set.size);
-	//io.sockets.emit('selected_option', 4);
+	//console.log('region',region);
+	//console.log('set size',collected_set.size);
 	if([3,4,5,6].includes(collected_data[0])){
 		io.sockets.emit('regions', region-2);
 		if(collected_data.length==time_out && collected_set.size==1){
@@ -158,7 +151,6 @@ function handleFrameData(data) {
 	  		}
 		}
 	}
-	//io.sockets.emit('frame', data);
 }
 
 
@@ -175,10 +167,6 @@ function get_region(x,y){
 	if(y < 0) y = 0;
 	if(x > max_x) x = max_x;
 	if(y > max_y) y = max_y;
-	console.log(x+"\t\t"+y);
+	//console.log(x+"\t\t"+y);
 	return (Math.floor(y/(incr_y+1))*2)+Math.floor(x/(incr_x+1))+1;
 }
-
-// app.listen(port, function(){
-//   console.log('Application at port', port);
-// });

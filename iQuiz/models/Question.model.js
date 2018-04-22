@@ -21,7 +21,10 @@ const Question = new Schema({
     option_4: {
       type: String
     }
-	}
+	},
+  question_answer:{
+    type: String
+  }
 },{
     collection: 'questions'
 });
