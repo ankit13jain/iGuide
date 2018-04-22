@@ -120,11 +120,6 @@
         if(pre_opt != option){
           pre_opt = option;
           $(".default-option-color").removeClass("selected-option");
-          // var elements = document.getElementsByClassName('default-option-color');
-          // for(var i=0;i<elements.length;i++){
-          //   console.log(elements[i].id)
-          //   elements[i].removeClass('selected-option');
-          // }
           var opt = "#opt"+option;
           $(opt).addClass('selected-option');
         }
