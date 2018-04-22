@@ -7,19 +7,54 @@
   <meta name="author" content="">
 
   <title>Result</title>
+<!-- 
+{"answers":[["Raleigh","Raleigh",true],["Washington DC","Raleigh",false],["Centennial Campus","Central Campus",false],["Centennial Campus","Central Campus",false],["Centennial Campus","Central Campus",false]],"accuracy":20} -->
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
   <!-- Custom styles for this template -->
   <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+  <style>
+    body{
+      background-image: url("../01.jpg");
+      background-repeat: repeat;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="row resultmargin">
+  <div class="container container-fluid">
+    <h1 class="display-4">Results</h1>
+    <table class="table-striped table-bordered" cellpadding="15" cellspacing="15" >
+      <thead>
+          <tr>
+            <th scope="col">Correct Answer</th>
+            <th scope="col">Selected Answer</th>
+            <th scope="col">Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0;i<data.answers.length;i++) {%>
+           <tr>
+             <td><%=data.answers[i][0]%></td>
+             <td><%=data.answers[i][1]%></td>
+             <td><%=data.answers[i][2]%></td>
+           </tr>
+           <% } %>
+         </tbody>
+    </table>
+    <br><br>
+    <h3>Your Accuracy is : <%= data.accuracy%> %</h3>
+    <p class="lead">
+      <a class="btn btn-primary btn-xlarge setheight"  href="/question" role="button"><b>Restart Quiz</b></a>
+    </p>
+  </div>
+  <!-- <div class="row resultmargin">
       <span class="border border-primary rounded text-center">
       <div class="col-md-12 setheightquestion">
         <br><br>
         <h1><b>Your Answer : Option <%= selected_option %></b></h1>
+        <h2><%= data.answers[0][0] %></h2>
       </div>
       </span>
   </div>
@@ -32,7 +67,23 @@
        <h1><b>Correct Answer : Option 2</b></h1>
        </div>
      </span>
-  </div>
+  </div> -->
+<!-- Placed at the end of the document so the pages load faster -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+      var socket = io.connect('http://localhost:3000');
+      $(document).ready(function () {
+        socket.emit('start_quiz');
+      });
+      socket.on('quiz_started', function (data) {
+          console.log('quiz started');
+          window.location.href = "http://localhost:3000/question";
+      });
 
+    </script>
 </body>
  </html>

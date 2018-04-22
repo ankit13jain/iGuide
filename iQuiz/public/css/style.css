@@ -10,7 +10,7 @@
 	height: 3em;
 	padding-top: 0.5em;
 	font-size: 2em;
-	margin-top: 5em
+	margin-top: 3em
 }
 
 .setheightquestion{
@@ -52,6 +52,7 @@
 
 .default-option-color{
 	background-color: white;
+	box-shadow: 2px 2px 8px 0px;
 }
 
 .set-margin-start{

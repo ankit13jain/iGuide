@@ -29,7 +29,7 @@ exports.selectedOption3 = function(req,res){
 	req.session.answers.push([correct_ans,selected_ans,correct_ans==selected_ans]);
 	data={};
 	data["answers"]=req.session.answers;
-	data["accuracy"]=req.session.correct*100/req.session.answers.length;
+	data["accuracy"]=(req.session.correct*100/req.session.answers.length).toFixed(2);
 	console.log("data",data);
 	res.setHeader('Content-Type', 'application/json');
 	res.send(data);

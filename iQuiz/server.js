@@ -47,7 +47,7 @@ var collected_data = [];
 var index=0;
 var isConfirmation = false;
 var isStartQuiz = false;
-var time_out = 60;
+var time_out = 600;
 var isAnswering = false;
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
