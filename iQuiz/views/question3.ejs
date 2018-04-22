@@ -20,13 +20,13 @@
     <h1 class="display-4"><%= questions[2].question_text %> </h1>
     <br><br>
     <div class="row">
-      <span class="border border-primary rounded text-center" id="opt1">
+      <span class="border border-primary rounded text-center default-option-color" id="opt1">
       <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
         <br><br>
         <h1><b><%= questions[2].options.option_1 %></b></h1>
       </div>
       </span>
-      <span class="border border-primary rounded text-center questionmargin" id="opt2">
+      <span class="border border-primary rounded text-center questionmargin default-option-color" id="opt2">
       <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
        <br><br>
        <h1><b><%= questions[2].options.option_2 %></b></h1>
@@ -35,13 +35,13 @@
   </div>
   <br><br><br><br><br>
   <div class="row">
-    <span class="border border-primary rounded text-center" id="opt3">
+    <span class="border border-primary rounded text-center default-option-color" id="opt3">
     <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
       <br><br>
       <h1><b><%= questions[2].options.option_3 %></b></h1>
     </div>
     </span>
-    <span class="border border-primary rounded text-center questionmargin" id="opt4">
+    <span class="border border-primary rounded text-center questionmargin default-option-color" id="opt4">
     <div class="col-md-6 mx-auto setheightquestion" style="width: 400px">
      <br><br>
      <h1><b><%= questions[2].options.option_4 %></b></h1>
@@ -107,12 +107,22 @@
         }
       });
 
-      socket.on('region',function(){
-        var elements = document.getElementsByClassName('default-option-color');
-        for(var i=0;i<elements.length;i++){
-          
+      var pre_opt = 1;
+      socket.on('regions',function(option){
+        console.log(option);
+        if(pre_opt != option){
+          pre_opt = option;
+          $(".default-option-color").removeClass("selected-option");
+          // var elements = document.getElementsByClassName('default-option-color');
+          // for(var i=0;i<elements.length;i++){
+          //   console.log(elements[i].id)
+          //   elements[i].removeClass('selected-option');
+          // }
+          var opt = "#opt"+option;
+          $(opt).addClass('selected-option');
         }
       });
+
       $('#cancel-btn').click(function(){
           console.log('cancel clicked');
           socket.emit('Question_Reading_Starts');

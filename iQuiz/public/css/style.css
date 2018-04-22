@@ -52,3 +52,11 @@
 .default-option-color{
 	background-color: white;
 }
+
+.set-margin-start{
+	margin-top: 2ex;
+}
+
+.selected-option{
+background-color: #80808066 !important;;
+}

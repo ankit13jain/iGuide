@@ -78,11 +78,11 @@ io.on('connection', function (socket) {
 
 connectionOptions = {
 	ip: 'tcp://0.tcp.ngrok.io/',
-	port: 16162
+	port: 12571
 };
 
 
-var socket = net.createConnection(16162, '0.tcp.ngrok.io', function(req,res) {
+var socket = net.createConnection(12571, '0.tcp.ngrok.io', function(req,res) {
 	setInterval(function() {
 		socket.write(JSON.stringify({
 		    "category": "heartbeat"
@@ -126,7 +126,7 @@ function handleFrameData(data) {
 	//console.log(collected_data.length);
 	index=index+1;
 	const collected_set = new Set(collected_data);
-	//console.log('region',region);
+	console.log('region',region);
 	//console.log('set size',collected_set.size);
 	if([3,4,5,6].includes(collected_data[0])){
 		io.sockets.emit('regions', region-2);
