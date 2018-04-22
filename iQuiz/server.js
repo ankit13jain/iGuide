@@ -20,7 +20,7 @@ const QuestionRouter = require('./routes/QuestionRouter');
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-// Session related for tracking logins
+// Session related for tracking logins to store the score
 app.use(session({
   secret: 'PackHacks',
   resave: true,
@@ -123,7 +123,7 @@ function handleFrameData(data) {
 	var region = get_region(data.avg.x,data.avg.y)
 	if(region!=0)
 		collected_data.splice(index%time_out, 1, region);
-	//console.log(collected_data.length);
+	console.log(collected_data.length);
 	index=index+1;
 	const collected_set = new Set(collected_data);
 	console.log('region',region);
