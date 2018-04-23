@@ -42,16 +42,42 @@ The Eye Tribe Tracker is an eye tracking system (released in October 2013) that 
 
 </Details>
 
-### Technologies 
+### Technologies and Hardware
+
 - Eye Tracker Device (Eye-Tribe) : Provides real-time data of user eye-movement on the screen
 - Socket.io : Excellent technology to handle passage of real-time streaming data (30fps) between multiple levels of clients and servers
-- NodeJS : Event-driven, Asynchronous backend framework for 
+- NodeJS : Event-driven, Asynchronous backend framework for
 - Ngrok : Tunneling service to communicate with remote servers
-- Express : 
-- Mongo
-- Web Frontend (Bootstrap)
-- Git
-- Python
+- Express : MVC in NodeJS
+- Mongo : NoSQL database
+- Web Frontend (Bootstrap) : Responsive grid based frontend framework
+- Git : Code Versioning
+- Python : Speedup development process by automating tasks
+
+###  Hardware Specs
+
+Accuracy    0.5 – 1 degree range
+Operating distance  45 – 75 cm
+Response time   20 ms
+Display devices     works with 24” and lower
+Weight  70 g
+Dimensions  20 x 1.9 x 1,9 cm
+
+- Sensing happens with high-resolution infrared LED
+
+Sampling rate   30 Hz and 60 Hz mode
+Accuracy    0.5° (average)
+Spatial resolution  0.1° (RMS)
+Latency     < 20 ms at 60 Hz
+Calibration     5, 9, 12 points
+Operating range     45 cm – 75 cm
+Tracking area   40 cm × 30 cm at 65 cm distance
+Screen sizes    Up to 24 inches
+API/SDK     C++, C# and Java included
+Data output     Binocular gaze data
+Dimensions  (W/H/D) 20 × 1.9 × 1.9 cm (7.9 × 0.75 × 0.75 inches)
+Weight  70 g
+Connection  USB 3.0 Superspeed
 
 ### Challenges 
 - Real-time streaming data : dynamic, configurable
@@ -59,6 +85,7 @@ The Eye Tribe Tracker is an eye tracking system (released in October 2013) that 
 - Cross platform compatibilities 
 - Programming langauge barriers
 - Sockets and TCP connections : Express handling became difficult
+- Eye blink and other variations
 - Volume of data (30fps) : Enabling browser support for such high volume data
 - Sleep : Since we are all humans  :p
 
