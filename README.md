@@ -56,17 +56,10 @@ The Eye Tribe Tracker is an eye tracking system (released in October 2013) that 
 
 ###  Hardware Specs
 
-Accuracy    0.5 – 1 degree range
-Operating distance  45 – 75 cm
-Response time   20 ms
-Display devices     works with 24” and lower
-Weight  70 g
-Dimensions  20 x 1.9 x 1,9 cm
-
 - Sensing happens with high-resolution infrared LED
 
 Sampling rate   30 Hz and 60 Hz mode
-Accuracy    0.5° (average)
+Accuracy    0.5° (average) and 0.5 – 1 degree range
 Spatial resolution  0.1° (RMS)
 Latency     < 20 ms at 60 Hz
 Calibration     5, 9, 12 points
