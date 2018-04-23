@@ -57,20 +57,19 @@ The Eye Tribe Tracker is an eye tracking system (released in October 2013) that 
 ###  Hardware Specs
 
 - Sensing happens with high-resolution infrared LED
-
-Sampling rate   30 Hz and 60 Hz mode
-Accuracy    0.5° (average) and 0.5 – 1 degree range
-Spatial resolution  0.1° (RMS)
-Latency     < 20 ms at 60 Hz
-Calibration     5, 9, 12 points
-Operating range     45 cm – 75 cm
-Tracking area   40 cm × 30 cm at 65 cm distance
-Screen sizes    Up to 24 inches
-API/SDK     C++, C# and Java included
-Data output     Binocular gaze data
-Dimensions  (W/H/D) 20 × 1.9 × 1.9 cm (7.9 × 0.75 × 0.75 inches)
-Weight  70 g
-Connection  USB 3.0 Superspeed
+- Sampling rate   30 Hz and 60 Hz mode
+- Accuracy    0.5° (average) and 0.5 – 1 degree range
+- Spatial resolution  0.1° (RMS)
+- Latency     < 20 ms at 60 Hz
+- Calibration     5, 9, 12 points
+- Operating range     45 cm – 75 cm
+- Tracking area   40 cm × 30 cm at 65 cm distance
+- Screen sizes    Up to 24 inches
+- API/SDK     C++, C# and Java included
+- Data output     Binocular gaze data
+- Dimensions  (W/H/D) 20 × 1.9 × 1.9 cm (7.9 × 0.75 × 0.75 inches)
+- Weight  70 g
+- Connection  USB 3.0 Superspeed
 
 ### Challenges 
 - Real-time streaming data : dynamic, configurable
